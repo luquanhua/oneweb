@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2026 新年祝福</title>
+    <title>周灿的 2026 专属祝福</title>
     <style>
         * {
             margin: 0;
@@ -67,18 +67,35 @@
             text-align: center;
         }
 
-        /* 标题样式 */
-        .year-display {
-            font-size: 120px;
+        /* 名字展示 */
+        .name-display {
+            font-size: 80px;
             font-weight: bold;
-            background: linear-gradient(45deg, #ffd700, #ffed4e, #ffd700);
+            background: linear-gradient(45deg, #ffd700, #ffed4e, #ff9a9e, #ffd700);
+            background-size: 300% 300%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             text-shadow: 0 0 60px rgba(255, 215, 0, 0.5);
+            margin-bottom: 10px;
+            animation: gradientShift 3s ease infinite, glow 2s ease-in-out infinite alternate;
+            letter-spacing: 15px;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .year-display {
+            font-size: 60px;
+            font-weight: bold;
+            color: rgba(255, 255, 255, 0.9);
             margin-bottom: 20px;
-            animation: glow 2s ease-in-out infinite alternate;
-            letter-spacing: 10px;
+            letter-spacing: 8px;
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards 0.3s;
         }
 
         @keyframes glow {
@@ -91,10 +108,10 @@
         }
 
         .subtitle {
-            font-size: 32px;
+            font-size: 28px;
             color: #fff;
             margin-bottom: 40px;
-            letter-spacing: 8px;
+            letter-spacing: 6px;
             opacity: 0;
             animation: fadeInUp 1s ease forwards 0.5s;
         }
@@ -117,6 +134,7 @@
         .blessing-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+            border-color: rgba(255, 215, 0, 0.3);
         }
 
         .blessing-text {
@@ -153,10 +171,12 @@
             animation: bounce 2s infinite;
             cursor: pointer;
             transition: transform 0.3s;
+            filter: drop-shadow(0 0 10px rgba(255,255,255,0.3));
         }
 
         .icon-item:hover {
-            transform: scale(1.2);
+            transform: scale(1.3);
+            filter: drop-shadow(0 0 20px rgba(255,215,0,0.8));
         }
 
         .icon-item:nth-child(2) { animation-delay: 0.2s; }
@@ -193,8 +213,8 @@
         }
 
         .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(255, 215, 0, 0.6);
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 6px 25px rgba(255, 215, 0, 0.6);
             letter-spacing: 2px;
         }
 
@@ -203,6 +223,13 @@
             margin-top: 60px;
             color: rgba(255, 255, 255, 0.6);
             font-size: 14px;
+        }
+
+        .personal-touch {
+            font-size: 18px;
+            color: rgba(255, 215, 0, 0.9);
+            margin-top: 15px;
+            font-style: italic;
         }
 
         /* 烟花效果 */
@@ -215,9 +242,32 @@
             z-index: 2;
         }
 
+        /* 姓名光晕特效 */
+        .name-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(255,215,0,0.2) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: -1;
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
+            50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.8; }
+        }
+
         @media (max-width: 600px) {
+            .name-display {
+                font-size: 50px;
+                letter-spacing: 10px;
+            }
             .year-display {
-                font-size: 60px;
+                font-size: 40px;
             }
             .subtitle {
                 font-size: 20px;
@@ -225,37 +275,45 @@
             .blessing-text {
                 font-size: 18px;
             }
+            .icons {
+                gap: 20px;
+                font-size: 36px;
+            }
         }
     </style>
 </head>
 <body>
     <!-- 粒子背景 -->
     <div class="particles" id="particles"></div>
+    
+    <!-- 姓名光晕 -->
+    <div class="name-glow"></div>
 
     <div class="container">
+        <div class="name-display">周灿</div>
         <div class="year-display">2026</div>
-        <div class="subtitle">新年快乐 · 万事如意</div>
+        <div class="subtitle">新年快乐 · 万事顺遂 · 前程似锦</div>
 
         <div class="icons">
-            <div class="icon-item" onclick="createFirework(event)">🎆</div>
-            <div class="icon-item" onclick="createFirework(event)">🧧</div>
-            <div class="icon-item" onclick="createFirework(event)">🎊</div>
-            <div class="icon-item" onclick="createFirework(event)">🎉</div>
+            <div class="icon-item" onclick="createFirework(event)" title="点击放烟花">🎆</div>
+            <div class="icon-item" onclick="createFirework(event)" title="点击放烟花">🧧</div>
+            <div class="icon-item" onclick="createFirework(event)" title="点击放烟花">🎊</div>
+            <div class="icon-item" onclick="createFirework(event)" title="点击放烟花">🎉</div>
         </div>
 
         <div class="blessing-card">
             <div class="blessing-text" id="blessing">
-                愿2026年的每一天都充满阳光与温暖<br>
-                事业如虹，步步高升<br>
-                家庭和睦，幸福安康<br>
-                所有的美好都如期而至 ✨
+                亲爱的周灿，愿2026年的每一天都为你闪耀<br>
+                愿你怀抱梦想，脚踏实地，乘风破浪<br>
+                事业如旭日东升，生活似春暖花开<br>
+                所有的美好都如期而至，所有的期待都不被辜负 ✨
             </div>
-            <button class="btn" onclick="changeBlessing()">换一个祝福</button>
+            <button class="btn" onclick="changeBlessing()">切换专属祝福</button>
         </div>
 
         <div class="footer">
-            <p>点击下方图标燃放烟花 · 点击按钮切换祝福</p>
-            <p style="margin-top: 10px;">祝您 2026 年心想事成！</p>
+            <p>点击图标或页面任意位置燃放烟花 · 点击按钮切换祝福语</p>
+            <div class="personal-touch">特别献给独一无二的周灿 💫</div>
         </div>
     </div>
 
@@ -263,23 +321,37 @@
         // 生成背景粒子
         function createParticles() {
             const container = document.getElementById('particles');
-            for (let i = 0; i < 50; i++) {
+            const particleCount = window.innerWidth < 600 ? 30 : 50;
+            
+            for (let i = 0; i < particleCount; i++) {
                 const particle = document.createElement('div');
                 particle.className = 'particle';
                 particle.style.left = Math.random() * 100 + '%';
                 particle.style.animationDelay = Math.random() * 15 + 's';
                 particle.style.animationDuration = (10 + Math.random() * 10) + 's';
+                
+                // 随机大小
+                const size = Math.random() * 4 + 2;
+                particle.style.width = size + 'px';
+                particle.style.height = size + 'px';
+                
                 container.appendChild(particle);
             }
         }
 
-        // 祝福库
+        // 周灿专属祝福库
         const blessings = [
-            "愿2026年的每一天都充满阳光与温暖<br>事业如虹，步步高升<br>家庭和睦，幸福安康<br>所有的美好都如期而至 ✨",
-            "新的一年，愿你所求皆如愿<br>所行化坦途，所向多喜乐<br>长安宁，岁无忧 🌟",
-            "2026，愿你拥有<br>始料不及的运气<br>突如其来的惊喜<br>还有应付一切的能力 💪",
-            "愿新年胜旧年，愿将来胜过往<br>愿你遍历山河，仍觉人间值得<br>新年快乐，万事顺遂 🎈",
-            "送你一朵小红花，开在你昨天新长的枝桠<br>愿你在2026年<br>保持热爱，奔赴山海<br>忠于自己，热爱生活 🌸"
+            "亲爱的周灿，愿2026年的每一天都为你闪耀<br>愿你怀抱梦想，脚踏实地，乘风破浪<br>事业如旭日东升，生活似春暖花开<br>所有的美好都如期而至，所有的期待都不被辜负 ✨",
+            
+            "周灿，新的一年愿你<br>拥有始料不及的运气，突如其来的惊喜<br>愿你遍历山河，觉得人间值得<br>愿你所求皆如愿，所行化坦途 🌟",
+            
+            "致周灿：<br>2026，愿你眼里有光，心中有爱<br>愿你保持热爱，奔赴山海<br>愿你既有软肋也有铠甲<br>永远年轻，永远热泪盈眶 💪",
+            
+            "周灿，送你满心祝福<br>愿你在新的一年里<br>烦恼随风而去，快乐如约而至<br>每一个明天都比今天更精彩 🎈",
+            
+            "给特别的周灿：<br>愿你2026年像烟花一样绚烂<br>像星光一样闪耀<br>像春风一样自由<br>像夏雨一样热烈，收获满满的幸福 🌸",
+            
+            "周灿，愿你在2026年<br>遇见更好的自己，拥有更美的风景<br>愿你的努力都有回报，你的善良都有回响<br>前方有路，未来可期 🌅"
         ];
 
         let currentIndex = 0;
@@ -287,40 +359,62 @@
         function changeBlessing() {
             currentIndex = (currentIndex + 1) % blessings.length;
             const textElement = document.getElementById('blessing');
+            
+            // 淡出效果
             textElement.style.opacity = '0';
             textElement.style.transform = 'translateY(10px)';
-            textElement.style.transition = 'all 0.3s';
+            textElement.style.transition = 'all 0.3s ease';
             
             setTimeout(() => {
                 textElement.innerHTML = blessings[currentIndex];
+                // 淡入效果
                 textElement.style.opacity = '1';
                 textElement.style.transform = 'translateY(0)';
+                
+                // 触发烟花庆祝
+                createCelebrationFireworks();
             }, 300);
+        }
 
-            // 自动放烟花
-            for(let i = 0; i < 5; i++) {
+        // 庆祝烟花
+        function createCelebrationFireworks() {
+            const positions = [
+                {x: window.innerWidth * 0.2, y: window.innerHeight * 0.3},
+                {x: window.innerWidth * 0.8, y: window.innerHeight * 0.3},
+                {x: window.innerWidth * 0.5, y: window.innerHeight * 0.2},
+                {x: window.innerWidth * 0.3, y: window.innerHeight * 0.5},
+                {x: window.innerWidth * 0.7, y: window.innerHeight * 0.5}
+            ];
+            
+            positions.forEach((pos, index) => {
                 setTimeout(() => {
-                    createFirework({clientX: Math.random() * window.innerWidth, clientY: Math.random() * window.innerHeight});
-                }, i * 100);
-            }
+                    createFirework({clientX: pos.x, clientY: pos.y});
+                }, index * 150);
+            });
         }
 
         // 烟花效果
         function createFirework(e) {
-            const colors = ['#ff0043', '#14fc56', '#1e90ff', '#ffd700', '#ff6600', '#ff00ff'];
+            const colors = [
+                '#ff0043', '#14fc56', '#1e90ff', '#ffd700', 
+                '#ff6600', '#ff00ff', '#00ffff', '#ff1493'
+            ];
             const x = e.clientX || window.innerWidth / 2;
             const y = e.clientY || window.innerHeight / 2;
+            const particleCount = window.innerWidth < 600 ? 20 : 30;
             
-            for (let i = 0; i < 30; i++) {
+            for (let i = 0; i < particleCount; i++) {
                 const firework = document.createElement('div');
                 firework.className = 'firework';
                 firework.style.left = x + 'px';
                 firework.style.top = y + 'px';
-                firework.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-                firework.style.boxShadow = `0 0 6px ${firework.style.backgroundColor}`;
                 
-                const angle = (Math.PI * 2 * i) / 30;
-                const velocity = 100 + Math.random() * 100;
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                firework.style.backgroundColor = color;
+                firework.style.boxShadow = `0 0 10px ${color}, 0 0 20px ${color}`;
+                
+                const angle = (Math.PI * 2 * i) / particleCount;
+                const velocity = 80 + Math.random() * 120;
                 const tx = Math.cos(angle) * velocity;
                 const ty = Math.sin(angle) * velocity;
                 
@@ -328,13 +422,44 @@
                 document.body.appendChild(firework);
                 
                 setTimeout(() => {
-                    firework.style.transform = `translate(${tx}px, ${ty}px)`;
+                    firework.style.transform = `translate(${tx}px, ${ty}px) scale(0)`;
                     firework.style.opacity = '0';
                 }, 10);
                 
                 setTimeout(() => {
                     firework.remove();
                 }, 1000);
+            }
+            
+            // 添加音效（如果用户之前与页面交互过）
+            playPopSound();
+        }
+
+        // 简单的音效模拟（使用 Web Audio API）
+        let audioContext;
+        
+        function playPopSound() {
+            if (!audioContext) {
+                audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            }
+            
+            try {
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+                
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+                
+                oscillator.frequency.value = 400 + Math.random() * 400;
+                oscillator.type = 'sine';
+                
+                gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
+                
+                oscillator.start(audioContext.currentTime);
+                oscillator.stop(audioContext.currentTime + 0.1);
+            } catch(e) {
+                // 静默失败，不影响用户体验
             }
         }
 
@@ -345,17 +470,39 @@
             }
         });
 
+        // 键盘空格键放烟花
+        document.addEventListener('keydown', function(e) {
+            if (e.code === 'Space') {
+                e.preventDefault();
+                createFirework({
+                    clientX: window.innerWidth / 2 + (Math.random() - 0.5) * 200,
+                    clientY: window.innerHeight / 2 + (Math.random() - 0.5) * 200
+                });
+            }
+        });
+
         // 初始化
         window.onload = function() {
             createParticles();
-            // 初始动画
+            
+            // 开场烟花秀
             setTimeout(() => {
                 createFirework({clientX: window.innerWidth * 0.3, clientY: window.innerHeight * 0.3});
             }, 500);
             setTimeout(() => {
                 createFirework({clientX: window.innerWidth * 0.7, clientY: window.innerHeight * 0.4});
             }, 800);
+            setTimeout(() => {
+                createFirework({clientX: window.innerWidth * 0.5, clientY: window.innerHeight * 0.25});
+            }, 1100);
         };
+
+        // 响应窗口大小变化
+        window.addEventListener('resize', function() {
+            const container = document.getElementById('particles');
+            container.innerHTML = '';
+            createParticles();
+        });
     </script>
 </body>
 </html>
